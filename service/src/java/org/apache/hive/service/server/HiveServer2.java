@@ -583,6 +583,7 @@ public class HiveServer2 extends CompositeService {
     while (true) {
       LOG.info("Starting HiveServer2");
       HiveConf hiveConf = new HiveConf();
+      //HiveServer2 退出之前尝试次数
       maxAttempts = hiveConf.getLongVar(HiveConf.ConfVars.HIVE_SERVER2_MAX_START_ATTEMPTS);
       long retrySleepIntervalMs = hiveConf
           .getTimeVar(ConfVars.HIVE_SERVER2_SLEEP_INTERVAL_BETWEEN_START_ATTEMPTS,
@@ -605,6 +606,7 @@ public class HiveServer2 extends CompositeService {
 
         server = new HiveServer2();
         server.init(hiveConf);
+        //
         server.start();
 
         try {
